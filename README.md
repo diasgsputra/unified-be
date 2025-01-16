@@ -8,3 +8,5 @@
 
 3. Link demo:
    https://youtu.be/ROpueuzLo8k
+   
+Documentation is included in this repository in file Unified.postman_collection.json (import it on your postman desktop) and example_request_body.txt
