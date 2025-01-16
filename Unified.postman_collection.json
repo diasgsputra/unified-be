@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "c226e4cc-34a0-4f6b-b743-b23534c1e895",
+		"name": "Unified",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16793602"
+	},
+	"item": [
+		{
+			"name": "Create table",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"root\",\r\n    \"password\":\"\",\r\n    \"url\": \"mongodb://localhost:27017\",\r\n    \"database_name\": \"tess5\",\r\n    \"database_type\":\"mongodb\",\r\n    \"query\":\"CREATE TABLE tessss (id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(100) NOT NULL,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);\",\r\n    \"table_name\": \"tes1\"\r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/tables",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tables"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List Tables",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"root\",\r\n    \"password\":\"\",\r\n    \"url\": \"mongodb://localhost:27017\",\r\n    \"database_name\": \"tess5\",\r\n    \"database_type\":\"mongodb\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/tables",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tables"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create database",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"tess5\",\r\n    \"url\": \"mongodb://localhost:27017\",\r\n    \"username\": \"root\",\r\n    \"password\": \"\",\r\n    \"database_type\": \"mongodb\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/connections/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"connections",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List database",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"jdbc:mysql://127.0.0.1:3306/\",\r\n    \"username\": \"root\",\r\n    \"password\": \"\",\r\n    \"database_type\": \"mysql\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/connections/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"connections",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get list database type",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/connections/database-types",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"connections",
+						"database-types"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

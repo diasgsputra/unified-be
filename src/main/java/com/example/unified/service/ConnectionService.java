@@ -1,9 +1,11 @@
 package com.example.unified.service;
 
 import com.example.unified.request.DatabaseConnectionRequest;
+import com.example.unified.request.TableRequest;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.MongoIterable;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.stereotype.Service;
 
@@ -63,20 +65,58 @@ public class ConnectionService {
     }
   }
 
-  public List<String> listDatabases(DataSource dataSource) {
-    List<String> databases = new ArrayList<>();
+//  public List<String> listDatabases(DataSource dataSource) {
+//    List<String> databases = new ArrayList<>();
+//
+//    try (Connection connection = dataSource.getConnection();
+//         ResultSet resultSet = connection.getMetaData().getCatalogs()) {
+//
+//      // Extract database names from the metadata
+//      while (resultSet.next()) {
+//        databases.add(resultSet.getString("TABLE_CAT"));
+//      }
+//    } catch (Exception e) {
+//      throw new RuntimeException("Failed to list databases: " + e.getMessage(), e);
+//    }
+//
+//    return databases;
+//  }
+public List<String> listDatabases(TableRequest tableRequest) {
+  List<String> databases = new ArrayList<>();
 
-    try (Connection connection = dataSource.getConnection();
-         ResultSet resultSet = connection.getMetaData().getCatalogs()) {
+  if ("mysql".equalsIgnoreCase(tableRequest.getDatabaseType())) {
+    // Handle MySQL
+    DataSource dataSource = DataSourceBuilder.create()
+        .url(tableRequest.getUrl()) // URL should not include the database name
+        .username(tableRequest.getUsername())
+        .password(tableRequest.getPassword())
+        .build();
 
-      // Extract database names from the metadata
+    try (Connection connection = dataSource.getConnection()) {
+      // Use the connection to get the list of databases
+      ResultSet resultSet = connection.getMetaData().getCatalogs();
+
+      // Extract database names
       while (resultSet.next()) {
         databases.add(resultSet.getString("TABLE_CAT"));
       }
     } catch (Exception e) {
-      throw new RuntimeException("Failed to list databases: " + e.getMessage(), e);
+      throw new RuntimeException("Failed to list databases in MySQL: " + e.getMessage(), e);
     }
-
-    return databases;
+  } else if ("mongodb".equalsIgnoreCase(tableRequest.getDatabaseType())) {
+    // Handle MongoDB
+    try (MongoClient mongoClient = MongoClients.create(tableRequest.getUrl())) {
+      MongoIterable<String> mongoDatabases = mongoClient.listDatabaseNames();
+      mongoDatabases.into(databases);
+    } catch (Exception e) {
+      throw new RuntimeException("Failed to list databases in MongoDB: " + e.getMessage(), e);
+    }
+  } else {
+    throw new IllegalArgumentException("Unsupported database type: " + tableRequest.getDatabaseType());
   }
+
+  return databases;
+}
+
+
 }

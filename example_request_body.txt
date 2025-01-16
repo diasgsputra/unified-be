@@ -1,0 +1,72 @@
+create database mongodb
+{
+    "name": "tess5",
+    "url": "mongodb://localhost:27017",
+    "username": "root",
+    "password": "",
+    "database_type": "mongodb"
+}
+
+create database mongodb
+{
+    "name": "cimb",
+    "url": "jdbc:mysql://127.0.0.1:3306/",
+    "username": "root",
+    "password": "",
+    "database_type": "mysql"
+}
+
+get list database mysql
+{
+    "url": "jdbc:mysql://127.0.0.1:3306/",
+    "username": "root",
+    "password": "",
+    "database_type": "mysql"
+}
+
+get list database mongodb
+{
+    "url": "mongodb://localhost:27017",
+    "username": "root",
+    "password": "",
+    "database_type": "mongodb"
+}
+
+create table MySQL
+
+{
+    "username":"root",
+    "password":"",
+    "url": "jdbc:mysql://127.0.0.1:3306/",
+    "database_name": "asteroid",
+    "database_type":"mysql",
+    "query":"CREATE TABLE tessss (id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(100) NOT NULL,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
+}
+
+create table mongodb
+{
+    "username":"root",
+    "password":"",
+    "url": "mongodb://localhost:27017",
+    "database_name": "tess5",
+    "database_type":"mongodb",
+    "table_name": "tes1"
+}
+
+get list table mysql
+{
+    "username":"root",
+    "password":"",
+    "url": "jdbc:mysql://127.0.0.1:3306/",
+    "database_name": "asteroid",
+    "database_type":"mysql"
+}
+
+get list table mongodb
+{
+    "username":"root",
+    "password":"",
+    "url": "mongodb://localhost:27017",
+    "database_name": "tess5",
+    "database_type":"mongodb"
+}
